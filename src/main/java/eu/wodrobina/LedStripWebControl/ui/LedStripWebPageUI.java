@@ -1,12 +1,13 @@
 package eu.wodrobina.LedStripWebControl.ui;
 
+import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringUI(path = "/")
-public class LedStripWebPage extends UI{
+public class LedStripWebPageUI extends UI{
 
     @Autowired
     private LedStripDAO ledStripDAO;
@@ -15,6 +16,7 @@ public class LedStripWebPage extends UI{
 
     @Override
     protected void init(VaadinRequest request) {
+
         VerticalLayout layout = new VerticalLayout();
         setContent(layout);
 
@@ -33,6 +35,12 @@ public class LedStripWebPage extends UI{
         menu.setWidth("100%");
         menu.addStyleName("menu");
         menuAndContent.addComponent(menu);
+
+        Button section = new Button("Start");
+        menu.addComponent(section);
+
+        section = new Button("Settings");
+        menu.addComponent(section);
 
         VerticalLayout content = new VerticalLayout();
         content.setSpacing(true);
