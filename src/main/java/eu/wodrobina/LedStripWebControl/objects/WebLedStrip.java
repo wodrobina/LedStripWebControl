@@ -6,7 +6,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Slider;
 
 
-public class WebLedStrip extends LedStrip{
+public class WebLedStrip extends PhysicalLedStrip {
 
     private ColorPicker colorPicker;
     private Slider brightlesSlider;
