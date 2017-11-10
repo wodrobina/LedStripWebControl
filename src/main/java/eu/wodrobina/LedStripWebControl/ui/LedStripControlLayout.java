@@ -80,5 +80,7 @@ public class LedStripControlLayout extends VerticalLayout{
     private void configDescription() {
         descriptionLbl = new Label("Description:");
         this.addComponent(descriptionLbl);
+        description = new TextArea();
+        this.addComponent(description);
     }
 }
