@@ -1,10 +1,9 @@
 package eu.wodrobina.LedStripWebControl.ui;
 
-import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
+import eu.wodrobina.LedStripWebControl.objects.LedStripDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringUI(path = "/")
@@ -13,7 +12,9 @@ public class LedStripWebPageUI extends UI{
     @Autowired
     private LedStripDAO ledStripDAO;
     @Autowired
-    private LedStripControlLayout ledStripleyout;
+    private LedStripControlLayout ledStripControlLayout;
+    @Autowired
+    private LedStripSettingLayout ledStripSettingLayout;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -36,12 +37,8 @@ public class LedStripWebPageUI extends UI{
         menu.setWidth("100%");
         menu.addStyleName("menu");
         menuAndContent.addComponent(menu);
-
-        Button section = new Button("Start");
-        menu.addComponent(section);
-
-        section = new Button("Settings");
-        menu.addComponent(section);
+        ledStripControlLayout = new LedStripControlLayout();
+        menu.addComponent(ledStripControlLayout);
 
         VerticalLayout content = new VerticalLayout();
         content.setSpacing(true);
@@ -55,8 +52,8 @@ public class LedStripWebPageUI extends UI{
         header.addStyleName("h2");
         content.addComponent(header);
 
-        ledStripleyout.addLedStrips(ledStripDAO.findAll());
-        content.addComponent(ledStripleyout);
+        ledStripSettingLayout.addLedStrips(ledStripDAO.findAll());
+        content.addComponent(ledStripSettingLayout);
     }
 
 }
