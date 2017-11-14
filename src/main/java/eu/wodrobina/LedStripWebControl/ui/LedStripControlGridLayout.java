@@ -3,10 +3,18 @@ package eu.wodrobina.LedStripWebControl.ui;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
+import eu.wodrobina.LedStripWebControl.objects.LedStrip;
+import eu.wodrobina.LedStripWebControl.objects.LedStripDAO;
+import eu.wodrobina.LedStripWebControl.objects.WebLedStrip;
+import eu.wodrobina.LedStripWebControl.objects.WebLedStripImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringComponent
 @UIScope
-public class LedStripControlLayout extends VerticalLayout{
+public class LedStripControlGridLayout extends VerticalLayout{
+
+
+    private LedStripDAO dao;
 
     private HorizontalLayout buttonsLayout;
     private Label isOnLbl;
@@ -22,8 +30,9 @@ public class LedStripControlLayout extends VerticalLayout{
     private Label descriptionLbl;
     private TextArea description;
 
-
-    public LedStripControlLayout() {
+    @Autowired
+    public LedStripControlGridLayout(LedStripDAO dao) {
+        this.dao = dao;
         configButtonLayout();
         configIsOn();
         configIpAddress();
@@ -36,6 +45,13 @@ public class LedStripControlLayout extends VerticalLayout{
     private void configButtonLayout() {
         buttonsLayout = new HorizontalLayout();
         Button addLedStrip = new Button("Add");
+        addLedStrip.addClickListener(click->{
+            WebLedStrip webLedStrip = new WebLedStripImpl(
+                    ipAddressTxtFld.getValue(),
+                    Integer.parseInt(portTxtFld.getValue()
+                    ));
+            dao.addOne(webLedStrip);
+        });
         Button delLedStrip = new Button("Delete");
         buttonsLayout.addComponents(addLedStrip, delLedStrip);
         this.addComponent(buttonsLayout);

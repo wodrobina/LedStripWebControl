@@ -12,7 +12,7 @@ public class LedStripWebPageUI extends UI{
     @Autowired
     private LedStripDAO ledStripDAO;
     @Autowired
-    private LedStripControlLayout ledStripControlLayout;
+    private LedStripControlGridLayout ledStripControlLayout;
     @Autowired
     private LedStripSettingLayout ledStripSettingLayout;
 
@@ -37,7 +37,7 @@ public class LedStripWebPageUI extends UI{
         menu.setWidth("100%");
         menu.addStyleName("menu");
         menuAndContent.addComponent(menu);
-        ledStripControlLayout = new LedStripControlLayout();
+//        ledStripControlLayout = new LedStripControlGridLayout();
         menu.addComponent(ledStripControlLayout);
 
         VerticalLayout content = new VerticalLayout();

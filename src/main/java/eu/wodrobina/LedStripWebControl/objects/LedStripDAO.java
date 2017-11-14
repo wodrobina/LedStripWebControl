@@ -1,20 +1,29 @@
 package eu.wodrobina.LedStripWebControl.objects;
 
-import eu.wodrobina.LedStripWebControl.objects.WebLedStrip;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Repository()
 public class LedStripDAO {
 
+    private List<WebLedStrip> ledStrips;
+
+    @PostConstruct
+    private void init(){
+        ledStrips = new ArrayList<>();
+        ledStrips.add(new WebLedStripImpl("192.168.1.2", 8092));
+        ledStrips.add(new WebLedStripImpl("192.168.1.3", 8093));
+        ledStrips.add(new WebLedStripImpl("192.168.1.4", 8094));
+    }
+
     public List<WebLedStrip> findAll(){
-        return Arrays.asList(
-                new WebLedStrip("192.168.1.2", 8090),
-                new WebLedStrip("192.168.1.3", 8090),
-                new WebLedStrip("192.168.1.4", 8092),
-                new WebLedStrip("192.168.1.5", 8090)
-        );
+        return ledStrips;
+    }
+
+    public void addOne(WebLedStrip webLedStrip){
+        ledStrips.add(webLedStrip);
     }
 }

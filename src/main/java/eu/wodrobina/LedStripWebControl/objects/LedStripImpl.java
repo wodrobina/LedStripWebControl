@@ -1,8 +1,6 @@
 package eu.wodrobina.LedStripWebControl.objects;
 
-import java.util.Objects;
-
-public class PhysicalLedStrip implements LedStrip{
+public class LedStripImpl implements LedStrip{
     private int red;
     private int green;
     private int blue;
@@ -13,21 +11,16 @@ public class PhysicalLedStrip implements LedStrip{
     private int port;
     private String description;
 
-    public PhysicalLedStrip() {
+    public LedStripImpl() {
 
     }
 
-    public PhysicalLedStrip(String ipAdress, int port) {
+    public LedStripImpl(String ipAdress, int port) {
         super();
         this.ipAdress = ipAdress;
         this.port = port;
     }
 
-    public PhysicalLedStrip(String ipAdress, int port, String description) {
-        this.ipAdress = ipAdress;
-        this.port = port;
-        this.description = description;
-    }
 
     public int getRed() {
         return red;
@@ -91,20 +84,5 @@ public class PhysicalLedStrip implements LedStrip{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PhysicalLedStrip)) return false;
-        PhysicalLedStrip ledStrip = (PhysicalLedStrip) o;
-        return port == ledStrip.port &&
-                Objects.equals(ipAdress, ledStrip.ipAdress) &&
-                Objects.equals(description, ledStrip.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ipAdress, port, description);
     }
 }
