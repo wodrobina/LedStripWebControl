@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository()
+@Repository
 public class LedStripDAO {
 
     private List<WebLedStrip> ledStrips;

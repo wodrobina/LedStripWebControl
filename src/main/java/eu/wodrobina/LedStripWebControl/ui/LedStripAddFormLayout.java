@@ -1,5 +1,6 @@
 package eu.wodrobina.LedStripWebControl.ui;
 
+import com.vaadin.shared.ui.colorpicker.Color;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
@@ -10,9 +11,7 @@ import eu.wodrobina.LedStripWebControl.objects.WebLedStripImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringComponent
-@UIScope
-public class LedStripControlGridLayout extends VerticalLayout{
-
+public class LedStripAddFormLayout extends VerticalLayout{
 
     private LedStripDAO dao;
 
@@ -31,7 +30,7 @@ public class LedStripControlGridLayout extends VerticalLayout{
     private TextArea description;
 
     @Autowired
-    public LedStripControlGridLayout(LedStripDAO dao) {
+    public LedStripAddFormLayout(LedStripDAO dao) {
         this.dao = dao;
         configButtonLayout();
         configIsOn();
@@ -40,6 +39,7 @@ public class LedStripControlGridLayout extends VerticalLayout{
         configColourPicker();
         configBrightless();
         configDescription();
+        setSizeUndefined();
     }
 
     private void configButtonLayout() {
@@ -52,8 +52,16 @@ public class LedStripControlGridLayout extends VerticalLayout{
                     ));
             dao.addOne(webLedStrip);
         });
-        Button delLedStrip = new Button("Delete");
-        buttonsLayout.addComponents(addLedStrip, delLedStrip);
+        Button clearLedStrip = new Button("Clear");
+        clearLedStrip.addClickListener(click->{
+            isOn.setValue(false);
+            ipAddressTxtFld.setValue("");
+            portTxtFld.setValue("");
+            colorPicker.setValue(Color.WHITE);
+            brightlessSlider.setValue(0.0);
+            description.setValue("");
+        });
+        buttonsLayout.addComponents(addLedStrip, clearLedStrip);
         this.addComponent(buttonsLayout);
     }
 

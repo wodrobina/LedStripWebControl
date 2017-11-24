@@ -1,10 +1,12 @@
 package eu.wodrobina.LedStripWebControl.ui;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import eu.wodrobina.LedStripWebControl.objects.LedStripDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @SpringUI(path = "/")
 public class LedStripWebPageUI extends UI{
@@ -12,9 +14,9 @@ public class LedStripWebPageUI extends UI{
     @Autowired
     private LedStripDAO ledStripDAO;
     @Autowired
-    private LedStripControlGridLayout ledStripControlLayout;
+    private LedStripAddFormLayout ledStripControlLayout;
     @Autowired
-    private LedStripSettingLayout ledStripSettingLayout;
+    private LedStripTableLayout ledStripSettingLayout;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -37,7 +39,7 @@ public class LedStripWebPageUI extends UI{
         menu.setWidth("100%");
         menu.addStyleName("menu");
         menuAndContent.addComponent(menu);
-//        ledStripControlLayout = new LedStripControlGridLayout();
+//        ledStripControlLayout = new LedStripAddFormLayout();
         menu.addComponent(ledStripControlLayout);
 
         VerticalLayout content = new VerticalLayout();

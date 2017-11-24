@@ -11,15 +11,14 @@ import java.util.List;
 
 
 @SpringComponent
-@UIScope
-public class LedStripSettingLayout extends FormLayout {
+public class LedStripTableLayout extends FormLayout {
 
-    private Grid<WebLedStrip> ledStripsGrid = new Grid<>();
+    private Grid<WebLedStrip> ledStripsGrid;
 
-    public LedStripSettingLayout() {
+    public LedStripTableLayout() {
+        ledStripsGrid = new Grid<>();
         addComponent(ledStripsGrid);
         ledStripsGridConfig();
-
     }
 
     private void ledStripsGridConfig(){
